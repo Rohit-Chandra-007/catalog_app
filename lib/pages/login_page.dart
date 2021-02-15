@@ -9,6 +9,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
+  final _formKey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        changeButton = true;
+      });
+      await Future.delayed(Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,71 +51,72 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter username',
-                      labelText: 'Username',
-                    ),
-                    onChanged: (value) {
-                      name = value;
-                      setState(() {});
-                    },
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Enter password',
-                      labelText: 'Password',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40.0,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      setState(() {
-                        changeButton = true;
-                      });
-                      await Future.delayed(Duration(seconds: 1));
-                      Navigator.pushNamed(context, MyRoutes.homeRoute);
-                    },
-                    child: AnimatedContainer(
-                      height: 40,
-                      width: changeButton ? 50 : 150,
-                      duration: Duration(seconds: 1),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius:
-                            BorderRadius.circular(changeButton ? 50 : 8),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Enter username',
+                          labelText: 'Username',
+                        ),
+                        onChanged: (value) {
+                          name = value;
+                          setState(() {});
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "username cannot be empty";
+                          }
+                          return null;
+                        }),
+                    TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: 'Enter password',
+                        labelText: 'Password',
                       ),
-                      alignment: Alignment.center,
-                      child: changeButton
-                          ? Icon(
-                              Icons.done,
-                              color: Colors.white,
-                            )
-                          : Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "password cannot be empty";
+                        } else if (value.length < 6) {
+                          return "password length should be atleast 6";
+                        }
+                        return null;
+                      },
                     ),
-                  )
-                  // ElevatedButton(
-                  //   child: Text('LOGIN'),
-                  //   style: TextButton.styleFrom(
-                  //     minimumSize: Size(150, 40),
-                  //   ),
-                  //   onPressed: () {
-                  //     Navigator.pushNamed(context, MyRoutes.homeRoute);
-                  //   },
-                  //)
-                ],
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                    Material(
+                      color: Colors.deepPurple,
+                      borderRadius:
+                          BorderRadius.circular(changeButton ? 50 : 8),
+                      child: InkWell(
+                        onTap: () => moveToHome(context),
+                        child: AnimatedContainer(
+                          height: 40,
+                          width: changeButton ? 50 : 150,
+                          duration: Duration(seconds: 1),
+                          alignment: Alignment.center,
+                          child: changeButton
+                              ? Icon(
+                                  Icons.done,
+                                  color: Colors.white,
+                                )
+                              : Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           ],
