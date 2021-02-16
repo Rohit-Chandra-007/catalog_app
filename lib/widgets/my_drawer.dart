@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
-  String imageUrl = 'https://economictimes.indiatimes.com/thumb/msid-70119616,'
+  final String imageUrl = 'https://economictimes.indiatimes.com/thumb/msid-70119616,'
       'width-1200,height-900,resizemode-4,imgsize-160034/'
       'rohit-sharma-the-odi-cricket-phenomenon.jpg?from=mdr';
 
