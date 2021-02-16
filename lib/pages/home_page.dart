@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_one/widgets/my_drawer.dart';
 
@@ -8,7 +10,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter One'),
+        title: Text(
+          'Catalog App',
+        ),
+        elevation: 0.0,
       ),
       body: Center(
         child: Container(
