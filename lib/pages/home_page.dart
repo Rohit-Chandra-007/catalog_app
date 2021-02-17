@@ -1,14 +1,32 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_one/modals/catalog.dart';
 import 'package:flutter_app_one/widgets/item_widget.dart';
 import 'package:flutter_app_one/widgets/my_drawer.dart';
 
-class HomePage extends StatelessWidget {
-  final int days = 30;
-  final dummyList = List.generate(50, (index) => CatalogModel.products[0]);
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    var catalogData = await rootBundle.loadString('assets/files/catalog.json');
+    var decodedData = jsonDecode(catalogData);
+    var productData = decodedData['products'];
+  }
 
   @override
   Widget build(BuildContext context) {
+    final dummyList = List.generate(50, (index) => CatalogModel.products[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text(
