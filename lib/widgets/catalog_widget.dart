@@ -3,7 +3,6 @@ import 'package:flutter_app_one/modals/catalog.dart';
 import 'package:flutter_app_one/widgets/my_app_theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-
 class CatalogWidget extends StatelessWidget {
   final Item catalog;
 
@@ -21,35 +20,38 @@ class CatalogWidget extends StatelessWidget {
           ),
           Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              catalog.name.text.lg
+                  .color(MyAppTheme.darkBluishColor)
+                  .bold
+                  .make(),
+              catalog.desc.text.textStyle(context.captionStyle).make(),
+              10.heightBox,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                buttonPadding: EdgeInsets.zero,
                 children: [
-                  catalog.name.text.lg.color(MyAppTheme.darkBluishColor).bold.make(),
-                  catalog.desc.text.textStyle(context.captionStyle).make(),
-                  10.heightBox,
-                  ButtonBar(
-                    alignment: MainAxisAlignment.spaceBetween,
-                    buttonPadding: EdgeInsets.zero,
-                    children: [
-                      "\$${catalog.price}".text.bold.xl.make(),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              MyAppTheme.darkBluishColor,
-                            ),
-                            shape: MaterialStateProperty.all(
-                              StadiumBorder(),
-                            )),
-                        child: "Buy".text.make(),
-                      )
-                    ],
-                  ).pOnly(right: 8.0)
+                  "\$${catalog.price}".text.bold.xl.make(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          MyAppTheme.darkBluishColor,
+                        ),
+                        shape: MaterialStateProperty.all(
+                          StadiumBorder(),
+                        )),
+                    child: "Buy".text.make(),
+                  )
                 ],
-              ))
+              ).pOnly(right: 8.0)
+            ],
+          ))
         ],
       ),
-    ).white.rounded.square(150).make().py16();
+    ).white.rounded.square(150).make().py8();
   }
 }
 

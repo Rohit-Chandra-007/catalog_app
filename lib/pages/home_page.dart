@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: MyAppTheme.creamColor,
       body: SafeArea(
         child: Container(
-          padding: Vx.m32,
+          padding: Vx.m16,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,8 +62,11 @@ class CatalogHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        "Catalog App".text.xl5.bold.color(MyAppTheme.darkBluishColor).make(),
-        "Trending products".text.xl2.make(),
+        "Catalog App".text.xl4.bold.color(MyAppTheme.darkBluishColor).make(),
+        SizedBox(
+          height: 10,
+        ),
+        "Trending products".text.xl.make(),
       ],
     );
   }
