@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_one/modals/catalog.dart';
-import 'package:flutter_app_one/widgets/item_widget.dart';
-import 'package:flutter_app_one/widgets/my_drawer.dart';
+import 'package:flutter_app_one/widgets/catalog_widget.dart';
+import 'package:flutter_app_one/widgets/my_app_theme.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -32,33 +33,54 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Catalog App',
+      backgroundColor: MyAppTheme.creamColor,
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CatalogHeader(),
+              if (CatalogModel.products != null &&
+                  CatalogModel.products.isNotEmpty)
+                CatalogList().expand()
+              else
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+            ],
+          ),
         ),
-        elevation: 0.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child:
-            (CatalogModel.products != null && CatalogModel.products.isNotEmpty)
-                ? GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15,
-                        mainAxisSpacing: 20),
-                    itemBuilder: (context, index) => ItemWidget(
-                      item: CatalogModel.products[index],
-                    ),
-                    itemCount: CatalogModel.products.length,
-                  )
-                : Center(
-                    child: CircularProgressIndicator(),
-                  ),
-      ),
-      drawer: Drawer(
-        child: MyDrawer(),
-      ),
+    );
+  }
+}
+
+class CatalogHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        "Catalog App".text.xl5.bold.color(MyAppTheme.darkBluishColor).make(),
+        "Trending products".text.xl2.make(),
+      ],
+    );
+  }
+}
+
+class CatalogList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: CatalogModel.products.length,
+      itemBuilder: (context, index) {
+        final catalog = CatalogModel.products[index];
+        return CatalogWidget(
+          catalog: catalog,
+        );
+      },
     );
   }
 }
