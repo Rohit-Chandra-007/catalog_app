@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_one/modals/catalog.dart';
-import 'package:flutter_app_one/widgets/catalog_widget.dart';
+import 'package:flutter_app_one/widgets/catalog_header.dart';
+import 'package:flutter_app_one/widgets/catalog_list.dart';
 import 'package:flutter_app_one/widgets/my_app_theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -43,11 +44,9 @@ class _HomePageState extends State<HomePage> {
               CatalogHeader(),
               if (CatalogModel.products != null &&
                   CatalogModel.products.isNotEmpty)
-                CatalogList().expand()
+                CatalogList().py8().expand()
               else
-                Center(
-                  child: CircularProgressIndicator(),
-                )
+                CircularProgressIndicator().centered().expand(),
             ],
           ),
         ),
@@ -56,34 +55,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class CatalogHeader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        "Catalog App".text.xl4.bold.color(MyAppTheme.darkBluishColor).make(),
-        SizedBox(
-          height: 10,
-        ),
-        "Trending products".text.xl.make(),
-      ],
-    );
-  }
-}
-
-class CatalogList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: CatalogModel.products.length,
-      itemBuilder: (context, index) {
-        final catalog = CatalogModel.products[index];
-        return CatalogWidget(
-          catalog: catalog,
-        );
-      },
-    );
-  }
-}
