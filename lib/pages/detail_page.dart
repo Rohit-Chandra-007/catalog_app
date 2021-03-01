@@ -12,6 +12,9 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: MyAppTheme.creamColor,
       bottomNavigationBar: Container(
         color: Colors.white,
@@ -29,12 +32,13 @@ class DetailPage extends StatelessWidget {
                   shape: MaterialStateProperty.all(
                     StadiumBorder(),
                   )),
-              child: "Buy".text.xl.make(),
-            ).wh(100, 50)
+              child: "Add to Cart".text.xl.make(),
+            ).wh(125, 50)
           ],
         ).p32(),
       ),
       body: SafeArea(
+        bottom: false,
         child: Column(
           children: [
             Hero(
@@ -59,8 +63,14 @@ class DetailPage extends StatelessWidget {
                           .textStyle(context.captionStyle)
                           .make(),
                       10.heightBox,
+                      "Est at diam ipsum duo justo tempor, diam et diam sanctus takimata ipsum ut sanctus et, et dolor sit duo."
+                          .text
+                          .bold
+                          .textStyle(context.captionStyle)
+                          .make()
+                          .py16(),
                     ],
-                  ).py64(),
+                  ).p32(),
                 ),
               ),
             ),

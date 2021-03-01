@@ -46,7 +46,7 @@ class CatalogWidget extends StatelessWidget {
                         shape: MaterialStateProperty.all(
                           StadiumBorder(),
                         )),
-                    child: "Buy".text.make(),
+                    child: "Add to Cart".text.make(),
                   )
                 ],
               ).pOnly(right: 16.0)
