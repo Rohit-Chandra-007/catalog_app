@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_one/modals/catalog.dart';
-import 'package:flutter_app_one/widgets/my_app_theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CatalogWidget extends StatelessWidget {
@@ -26,10 +25,7 @@ class CatalogWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              catalog.name.text.lg
-                  .color(MyAppTheme.darkBluishColor)
-                  .bold
-                  .make(),
+              catalog.name.text.lg.color(context.accentColor).bold.make(),
               catalog.desc.text.textStyle(context.captionStyle).make(),
               10.heightBox,
               ButtonBar(
@@ -41,7 +37,7 @@ class CatalogWidget extends StatelessWidget {
                     onPressed: () {},
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                          MyAppTheme.darkBluishColor,
+                          context.theme.buttonColor,
                         ),
                         shape: MaterialStateProperty.all(
                           StadiumBorder(),
@@ -54,7 +50,7 @@ class CatalogWidget extends StatelessWidget {
           ))
         ],
       ),
-    ).white.rounded.square(150).make().py8();
+    ).color(context.cardColor).rounded.square(150).make().py8();
   }
 }
 
@@ -66,6 +62,6 @@ class CatalogImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       image,
-    ).box.rounded.p8.color(Colors.white).make().p16().w40(context);
+    ).box.rounded.p8.color(context.canvasColor).make().p16().w40(context);
   }
 }
