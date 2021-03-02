@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_one/modals/catalog.dart';
-import 'package:flutter_app_one/widgets/my_app_theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DetailPage extends StatelessWidget {
