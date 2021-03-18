@@ -5,9 +5,8 @@ import 'package:velocity_x/velocity_x.dart';
 class CatalogWidget extends StatelessWidget {
   final Item catalog;
 
-  const CatalogWidget({Key key, @required this.catalog})
-      : assert(catalog != null),
-        super(key: key);
+  const CatalogWidget({Key? key, required this.catalog})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +24,8 @@ class CatalogWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              catalog.name.text.lg.color(context.accentColor).bold.make(),
-              catalog.desc.text.textStyle(context.captionStyle).make(),
+              catalog.name!.text.lg.color(context.accentColor).bold.make(),
+              catalog.desc!.text.textStyle(context.captionStyle!).make(),
               10.heightBox,
               ButtonBar(
                 alignment: MainAxisAlignment.spaceBetween,
@@ -55,13 +54,13 @@ class CatalogWidget extends StatelessWidget {
 }
 
 class CatalogImage extends StatelessWidget {
-  final String image;
+  final String? image;
 
-  const CatalogImage({Key key, @required this.image}) : super(key: key);
+  const CatalogImage({Key? key, required this.image}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Image.network(
-      image,
+      image!,
     ).box.rounded.p8.color(context.canvasColor).make().p16().w40(context);
   }
 }

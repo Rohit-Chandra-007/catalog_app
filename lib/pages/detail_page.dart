@@ -4,9 +4,8 @@ import 'package:velocity_x/velocity_x.dart';
 
 class DetailPage extends StatelessWidget {
   final Item catalog;
-  const DetailPage({Key key, @required this.catalog})
-      : assert(catalog != null),
-        super(key: key);
+  const DetailPage({Key? key, required this.catalog})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class DetailPage extends StatelessWidget {
           children: [
             Hero(
               tag: Key(catalog.id.toString()),
-              child: Image.network(catalog.image).pOnly(top: 16),
+              child: Image.network(catalog.image!).pOnly(top: 16),
             ).h40(context),
             Expanded(
               child: VxArc(
@@ -54,18 +53,18 @@ class DetailPage extends StatelessWidget {
                   color: context.cardColor,
                   child: Column(
                     children: [
-                      catalog.name.text.xl4
+                      catalog.name!.text.xl4
                           .color(context.accentColor)
                           .bold
                           .make(),
-                      catalog.desc.text.xl
-                          .textStyle(context.captionStyle)
+                      catalog.desc!.text.xl
+                          .textStyle(context.captionStyle!)
                           .make(),
                       10.heightBox,
                       "Est at diam ipsum duo justo tempor, diam et diam sanctus takimata ipsum ut sanctus et, et dolor sit duo."
                           .text
                           .bold
-                          .textStyle(context.captionStyle)
+                          .textStyle(context.captionStyle!)
                           .make()
                           .py16(),
                     ],

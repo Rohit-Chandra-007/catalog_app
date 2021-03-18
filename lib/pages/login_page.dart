@@ -13,7 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) async {
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState!.validate()) {
       setState(() {
         changeButton = true;
       });
@@ -32,9 +32,16 @@ class _LoginPageState extends State<LoginPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(
-              'assets/images/login_image.png',
-              fit: BoxFit.cover,
+            Container(
+              height: 250.0,
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.only(top: 64),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(200),
+              ),
+              child: Center(
+                child: Image.asset('assets/images/login_image.png'),
+              ),
             ),
             SizedBox(
               height: 20.0,
@@ -66,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                           setState(() {});
                         },
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return "username cannot be empty";
                           }
                           return null;
@@ -78,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: 'Password',
                       ),
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return "password cannot be empty";
                         } else if (value.length < 6) {
                           return "password length should be atleast 6";
